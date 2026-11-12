@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DelanoStore POS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- START: Halaman Opening Animasi -->
+        <section id="start-screen" class="screen active">
+            <div class="animation-container">
+                <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=400&q=80" alt="iPhone 360" class="rotating-iphone">
+                <h1 class="brand-text">DelanoStore</h1>
+            </div>
+        </section>
+
+        <!-- MENU: Pilih Daftar Menu -->
+        <section id="menu-screen" class="screen">
+            <header class="app-header">
+                <h2>Pilih Daftar Menu</h2>
+                <div class="cart-indicator" onclick="pos.goToCheckout()">
+                    <span id="cart-qty">0</span> item - <span id="cart-total">Rp 0</span>
+                    <button class="btn-primary small">Bayar</button>
+                </div>
+            </header>
+            <div class="grid-container" id="product-catalog">
+                <!-- Produk di-render via JS -->
+            </div>
+        </section>
+
+        <!-- BAYAR: Proses Checkout -->
+        <section id="checkout-screen" class="screen">
+            <header class="app-header">
+                <button onclick="pos.goToMenu()" class="btn-secondary">Kembali</button>
+                <h2>Pembayaran</h2>
+            </header>
+            <div class="checkout-layout">
+                <div class="summary-card" id="order-summary"></div>
+                <div class="payment-card">
+                    <h3>Input Uang Pelanggan</h3>
+                    <div class="input-wrapper">
+                        <label for="cash-input">Nominal Uang (Rp)</label>
+                        <input type="number" id="cash-input" placeholder="Masukkan jumlah uang..." autocomplete="off">
+                    </div>
+                    <button onclick="pos.processTransaction()" class="btn-primary full-width">Selesaikan Transaksi</button>
+                    <p id="error-msg" class="error-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINISH: Nota Hasil Akhir -->
+        <div id="receipt-modal" class="modal">
+            <div class="modal-card">
+                <div class="receipt-content" id="receipt-text">
+                    <!-- Nota dicetak di sini -->
+                </div>
+                <div class="modal-footer">
+                    <button onclick="pos.finishAndReset()" class="btn-primary full-width">Selesai (Tutup)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
